@@ -26,14 +26,31 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    packaging {
+        resources.excludes.add("META-INF/*")
+    }
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
+    }
+
 }
+
+
 
 dependencies {
     implementation("com.android.volley:volley:1.2.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.8.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("org.springframework:spring-context:5.3.10")
+    implementation ("org.springframework:spring-web:5.3.10")
     testImplementation("junit:junit:4.13.2")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:3.1.5")
+    testImplementation ("org.junit.jupiter:junit-jupiter-api:5.7.2")
+    testImplementation ("org.springframework.boot:spring-boot-starter-test")
+    testRuntimeOnly ("org.junit.jupiter:junit-jupiter-engine:5.7.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
