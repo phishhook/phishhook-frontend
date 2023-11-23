@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -50,21 +51,16 @@ public class MainActivity extends AppCompatActivity {
 
         Uri my_uri= getIntent().getData();
 
-        if (my_uri == null) {
-            return;
+        if (my_uri != null) {
+            String url = my_uri.toString();
+            Log.d("Received link: ", url);
+
+            // Launch NotificationSystemActivity
+            Intent notificationIntent = new Intent(MainActivity.this, NotificationSystemActivity.class);
+            notificationIntent.setData(my_uri);
+            startActivity(notificationIntent);
         }
 
-        Intent i = new Intent();
-        i.setPackage("com.android.chrome");
-        i.setAction(Intent.ACTION_VIEW);
-        System.out.println(getIntent().getData() + "  ***********");
-        linkAnalysis(getIntent().getData().toString());
-        //Log.d("LINK", getIntent().getData().toString());
-        i.setData(getIntent().getData());
-
-
-
-        startActivity(i);
 
     }
 

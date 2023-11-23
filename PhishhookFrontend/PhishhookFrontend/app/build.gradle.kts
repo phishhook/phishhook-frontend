@@ -46,6 +46,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("org.springframework:spring-context:5.3.10")
     implementation ("org.springframework:spring-web:5.3.10")
+    implementation ("com.airbnb.android:lottie:6.2.0")
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.springframework.boot:spring-boot-starter-test:3.1.5")
     testImplementation ("org.junit.jupiter:junit-jupiter-api:5.7.2")

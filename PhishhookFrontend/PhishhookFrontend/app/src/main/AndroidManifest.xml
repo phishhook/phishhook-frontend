@@ -30,6 +30,17 @@
                 <data android:scheme="https" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".NotificationSystemActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".LinkAnalysisActivity"
+            android:exported="true">
+        </activity>
+
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
