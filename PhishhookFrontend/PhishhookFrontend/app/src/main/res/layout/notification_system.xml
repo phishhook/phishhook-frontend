@@ -107,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_button"
-            android:text="Continue to link"
+            android:text="Continue to default browser"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:layout_marginStart="8dp"

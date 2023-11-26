@@ -22,6 +22,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,16 +55,38 @@ public class MainActivity extends AppCompatActivity {
 
         if (my_uri != null) {
             String url = my_uri.toString();
-            Log.d("Received link: ", url);
+
+
+            String extractedUrl = extractUrl(url);
+
+            Uri uri = Uri.parse(extractedUrl);
+
+
+            Log.d("Received link: ", uri.toString());
 
             // Launch NotificationSystemActivity
             Intent notificationIntent = new Intent(MainActivity.this, NotificationSystemActivity.class);
-            notificationIntent.setData(my_uri);
+            notificationIntent.setData(uri);
             startActivity(notificationIntent);
         }
 
 
     }
+
+
+    private static String extractUrl(String inputUrl) {
+        String patternString = "q=([^&]+)";
+        Pattern pattern = Pattern.compile(patternString);
+        Matcher matcher = pattern.matcher(inputUrl);
+
+        if (matcher.find()) {
+            return matcher.group(1);
+        } else {
+            return inputUrl;
+        }
+    }
+
+
 
     @Override
     protected void onStart() {

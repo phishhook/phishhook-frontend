@@ -2,17 +2,16 @@ package com.example.networktest;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.Button;
 
 
-
-import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 
@@ -40,6 +39,13 @@ public class NotificationSystemActivity extends Activity {
         urlView = findViewById(R.id.linkResultTextView);
         actionButton = findViewById(R.id.actionButton);
 
+        actionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLinkInBrowser();  // Call the method to open the link in the browser
+            }
+        });
+
         this.queue = Volley.newRequestQueue(this);
 
 
@@ -50,6 +56,12 @@ public class NotificationSystemActivity extends Activity {
         Intent linkAnalysisIntent = new Intent(this, LinkAnalysisActivity.class);
         linkAnalysisIntent.putExtra("url", url);
         startActivityForResult(linkAnalysisIntent, 1);
+    }
+
+    private void openLinkInBrowser() {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        browserIntent.setPackage("com.android.chrome");
+        startActivity(browserIntent);
     }
 
     @Override
@@ -88,20 +100,40 @@ public class NotificationSystemActivity extends Activity {
             // Display logic based on the percentage
             if (percent > 50) {
                 // Display a message and image for a safe link
-                resultTextView.setText("This link is safe");
-                resultImageView.setImageResource(R.drawable.check);
+                resultTextView.setText("We have determined this link is " + result + " safe.");
+                resultImageView.setImageResource(R.drawable.legitimate);
             } else {
                 // Display a message and image for an unsafe link
-                resultTextView.setText("This link is not safe");
+                resultTextView.setText("We have determined this link is only " + result + " safe. "+
+                        "We recommend not visiting this webpage");
+                setResultTextMargin(150);  // Set the desired margin
                 resultImageView.setImageResource(R.drawable.phishing);
             }
         } else {
             // Display a message and image for an undetermined link
-            resultTextView.setText("Unable to determine safety");
+            resultTextView.setText("We were not able to determine the safety of this link. Please " +
+                    "proceed with caution");
+            setResultTextMargin(150);  // Set the desired margin
+
+            resultImageView.setImageResource(R.drawable.question);
         }
     }
 
+    private int dpToPixels(int dp) {
+        float scale = getResources().getDisplayMetrics().density;
+        return (int) (dp * scale + 0.5f);
+    }
 
+    private void setResultTextMargin(int margin) {
+        // Get the layout params of the "Outcome" text
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) resultTextView.getLayoutParams();
+
+        // Set the top margin
+        layoutParams.topMargin = dpToPixels(margin);
+
+        // Apply the updated layout params
+        resultTextView.setLayoutParams(layoutParams);
+    }
 
 
 }

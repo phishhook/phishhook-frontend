@@ -31,9 +31,27 @@
             </intent-filter>
         </activity>
 
+
         <activity
             android:name=".NotificationSystemActivity"
-            android:exported="true">
+            android:exported="true"
+            android:label="@string/app_name">
+
+            <!-- Intent filters for the activity -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- Intent filter for handling VIEW actions -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+            </intent-filter>
+
         </activity>
 
         <activity
