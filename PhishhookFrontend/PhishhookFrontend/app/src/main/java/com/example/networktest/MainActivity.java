@@ -69,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
             notificationIntent.setData(uri);
             startActivity(notificationIntent);
         }
+        Intent historyIntent = new Intent(MainActivity.this, LinkHistoryActivity.class);
+        startActivity(historyIntent);
 
 
     }
@@ -118,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onResponse(String response) {
 
-            System.out.println(response.toString());
+            //System.out.println(response.toString());
         }
     };
 
