@@ -1,6 +1,7 @@
 package com.example.networktest;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.networktest.authentication.LoginFragment;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -36,6 +38,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.queue = Volley.newRequestQueue(this);
         setContentView(R.layout.activity_main);
+
+        // Check if savedInstanceState is null to avoid recreating the fragment on orientation changes
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        LoginFragment loginFragment = new LoginFragment();
+        if (savedInstanceState == null) {
+            // Start with the Login Fragment
+            fragmentManager.beginTransaction()
+                    .add(R.id.fragment_container, loginFragment)
+                    .commit();
+        }
+
+
         String LinkApiURL = "http://ec2-18-224-251-242.us-east-2.compute.amazonaws.com:8080/links";
         StringRequest jsonLinkRequest = new StringRequest (Request.Method.GET, LinkApiURL , linkDataListener, errorListener){
             @Override
@@ -47,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-
         queue.add(jsonLinkRequest);
         System.out.println(getIntent().getData() + "+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+**+*+*++**+");
 
@@ -56,11 +69,9 @@ public class MainActivity extends AppCompatActivity {
         if (my_uri != null) {
             String url = my_uri.toString();
 
-
             String extractedUrl = extractUrl(url);
 
             Uri uri = Uri.parse(extractedUrl);
-
 
             Log.d("Received link: ", uri.toString());
 
@@ -69,12 +80,9 @@ public class MainActivity extends AppCompatActivity {
             notificationIntent.setData(uri);
             startActivity(notificationIntent);
         }
-        Intent historyIntent = new Intent(MainActivity.this, LinkHistoryActivity.class);
-        startActivity(historyIntent);
-
-
+//        Intent historyIntent = new Intent(MainActivity.this, LinkHistoryActivity.class);
+//        startActivity(historyIntent);
     }
-
 
     private static String extractUrl(String inputUrl) {
         String patternString = "q=([^&]+)";

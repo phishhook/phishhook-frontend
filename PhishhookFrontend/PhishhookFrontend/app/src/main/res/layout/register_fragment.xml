@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primary"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:textColor="@color/whiteAccent"
+        android:textSize="@dimen/text_size_h1"
+        android:fontFamily="@font/font_family"
+        android:textStyle="normal"
+        android:textFontWeight="800"
+        android:layout_marginBottom="48dp"
+        android:gravity="start"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter your phone number"
+        android:textColor="@color/whiteAccent"
+        android:textSize="@dimen/text_size_h2"
+        android:layout_marginBottom="24dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="8dp">
+
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/ccp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:ccp_textSize="14sp"
+            app:ccp_contentColor="@color/whiteAccent"
+            app:ccp_arrowSize="14sp"
+            app:ccp_showArrow="true"
+            app:ccp_showFullName="false"
+            app:ccp_showNameCode="false"
+            app:ccp_useFlagEmoji="false"
+            app:ccpDialog_backgroundColor="@color/whiteAccent"
+            app:ccpDialog_textColor="@color/softBlack"
+            app:ccpDialog_searchEditTextTint="@color/white"
+            app:ccpDialog_showPhoneCode="true"
+            app:ccp_countryPreference="US,CA,MX,BR"
+            app:ccpDialog_showTitle="true"
+            app:ccp_defaultNameCode="US"
+            app:ccp_showPhoneCode="true"
+            app:ccp_autoDetectCountry="true"
+            app:ccpDialog_cornerRadius="16dp"
+            app:ccp_customMasterCountries="US,CA,MX,BR,DE,FR"
+            app:ccp_flagBorderColor="@color/primary"
+            app:ccp_textGravity="CENTER"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutPhoneNumber"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editTextPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:hint="Phone Number"
+                android:layout_marginBottom="24dp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose your username"
+        android:textColor="@color/whiteAccent"
+        android:textSize="@dimen/text_size_h2" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutUsername"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:hintEnabled="false"
+        android:layout_marginTop="24dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTextUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="Username" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonLogin"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Register"
+        android:fontFamily="@font/font_family"
+        android:textStyle="normal"
+        android:textFontWeight="700"
+        android:textSize="48px"
+        android:backgroundTint="@color/accent"
+        app:cornerRadius="4dp"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        />
+
+    <TextView
+        android:id="@+id/sign_up_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Already have an account? Log In Here"
+        android:textFontWeight="700"
+        android:textSize="@dimen/text_size_h3"
+        android:focusable="true"
+        android:clickable="true"
+        android:layout_marginTop="16dp"
+        android:textColor="@color/whiteAccent"
+        android:fontFamily="@font/font_family"
+        android:textStyle="normal"
+        android:gravity="center_horizontal" />
+
+</LinearLayout>
