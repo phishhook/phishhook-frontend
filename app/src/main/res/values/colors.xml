@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="lightBlue">#FF6DA8FF</color>
+
+    <!--    Primary Colors-->
+    <color name="primary">#1C939A</color>
+    <color name="primaryAccent">#146C73</color>
+    <!--    Secondary Colors-->
+    <color name="secondary">#E88835</color>
+    <color name="secondaryAccent">#D9B85F</color>
+    <!--    Accent Colors-->
+    <color name="accent">#F8E9C5</color>
+    <color name="whiteAccent">#FAFAFA</color>
+    <!--    Neutral Colors-->
+    <color name="white">#FFFFFF</color>
+    <color name="softBlack">#333333</color>
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.LinkHistoryFragment"
+    android:background="@color/primary">
+
+    <!-- Header TextView for 'Link History' -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Link History"
+        android:textSize="32sp"
+        android:textStyle="normal"
+        android:textFontWeight="800"
+        android:fontFamily="@font/font_family"
+        android:textColor="@color/whiteAccent"
+        android:gravity="start"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/primary" />
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/recyclerView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="@color/primary"-->
+<!--        android:nestedScrollingEnabled="true"-->
+<!--        android:overScrollMode="never" />-->
+
+</FrameLayout>
