@@ -21,9 +21,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -86,7 +90,10 @@ public class LinkHistoryActivity extends AppCompatActivity {
                     JSONObject link = response.getJSONObject(i);
                     // TODO: use the actual user's ID instead of just 1
                     if (link.getInt("user_id") == 1){
-                        itemData item = new itemData(link.getString("url"),link.getString("clicked_at"),link.getString("is_phishing"));
+                        String originalDateTime = link.getString("clicked_at");
+                        String formattedDateTime = formatDateTime(originalDateTime);
+
+                        itemData item = new itemData(link.getString("url"), formattedDateTime, link.getString("is_phishing"));
                         mDataList.add(item);
                     }
                 }
@@ -106,4 +113,17 @@ public class LinkHistoryActivity extends AppCompatActivity {
             Log.e("JSON ERROR", error.toString());
         }
     };
+
+    private String formatDateTime(String dateTime) {
+        try {
+            SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+            SimpleDateFormat targetFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.getDefault());
+            Date date = originalFormat.parse(dateTime);
+            return targetFormat.format(date);
+        } catch (ParseException e) {
+            Log.e("DateFormatError", "Error in parsing date", e);
+            return dateTime; // Return the original date if parsing fails
+        }
+    }
 }
+

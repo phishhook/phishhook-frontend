@@ -40,6 +40,9 @@ android {
 
 
 dependencies {
+    implementation ("com.squareup.okhttp3:okhttp:4.9.0") // Use the latest version
+    implementation ("com.hbb20:ccp:2.7.0") // Use the latest version
+    implementation("com.google.android.material:material:1.4.0") // Use the latest version
     implementation("com.android.volley:volley:1.2.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.8.0")

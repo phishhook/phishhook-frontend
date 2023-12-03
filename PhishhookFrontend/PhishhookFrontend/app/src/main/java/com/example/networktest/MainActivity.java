@@ -1,8 +1,11 @@
 package com.example.networktest;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.networktest.authentication.LoginFragment;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -36,45 +40,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.queue = Volley.newRequestQueue(this);
         setContentView(R.layout.activity_main);
-        String LinkApiURL = "http://ec2-18-224-251-242.us-east-2.compute.amazonaws.com:8080/links";
-        StringRequest jsonLinkRequest = new StringRequest (Request.Method.GET, LinkApiURL , linkDataListener, errorListener){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                // TODO: store key in env file
-                params.put("X-API-KEY", "phishhookRyJHCenIz97Q5LIDPmHhDyg9eddxaBO29omDuzM1D5BsDRKH5mo3j8pmBehoO2Roj0Z4zWuDHlNW4AJVrSnLZF6lUravmyje13YB1LBriXHxYlxLUDYeXmV");
-                return params;
+
+        // Check if savedInstanceState is null to avoid recreating the fragment on orientation changes
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        LoginFragment loginFragment = new LoginFragment();
+        if (savedInstanceState == null) {
+            if (needsReAuthorization()) {
+                // Start with the Login Fragment
+                fragmentManager.beginTransaction()
+                        .add(R.id.fragment_container, loginFragment)
+                        .commit();
+            } else {
+                Intent intent = new Intent(MainActivity.this, LinkHistoryActivity.class);
+                startActivity(intent);
             }
-        };
-
-
-        queue.add(jsonLinkRequest);
-        System.out.println(getIntent().getData() + "+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+**+*+*++**+");
+        }
 
         Uri my_uri= getIntent().getData();
 
         if (my_uri != null) {
             String url = my_uri.toString();
-
-
             String extractedUrl = extractUrl(url);
-
             Uri uri = Uri.parse(extractedUrl);
-
-
             Log.d("Received link: ", uri.toString());
-
             // Launch NotificationSystemActivity
             Intent notificationIntent = new Intent(MainActivity.this, NotificationSystemActivity.class);
             notificationIntent.setData(uri);
             startActivity(notificationIntent);
         }
-        Intent historyIntent = new Intent(MainActivity.this, LinkHistoryActivity.class);
-        startActivity(historyIntent);
-
-
+//        Intent historyIntent = new Intent(MainActivity.this, LinkHistoryActivity.class);
+//        startActivity(historyIntent);
     }
-
 
     private static String extractUrl(String inputUrl) {
         String patternString = "q=([^&]+)";
@@ -87,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
             return inputUrl;
         }
     }
-
-
 
     @Override
     protected void onStart() {
@@ -140,4 +134,14 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(error + "#########");
         }
     };
+
+    private boolean needsReAuthorization() {
+        SharedPreferences sharedPref = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE);
+        long lastLoginDate = sharedPref.getLong("lastLoginDate", 0);
+        long currentTime = System.currentTimeMillis();
+        long sevenDaysInMillis = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+
+        return (currentTime - lastLoginDate) > sevenDaysInMillis;
+    }
+
 }

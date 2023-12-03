@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Example headline sizes based on Material Design guidelines -->
+    <dimen name="text_size_h1">32sp</dimen> <!-- h1 -->
+    <dimen name="text_size_h2">24sp</dimen> <!-- h2 -->
+    <dimen name="text_size_h3">20sp</dimen> <!-- h3 -->
+    <dimen name="text_size_h4">18sp</dimen> <!-- h4 -->
+    <dimen name="text_size_h5">16sp</dimen> <!-- h5 -->
+    <dimen name="text_size_h6">14sp</dimen> <!-- h6 -->
+</resources>
