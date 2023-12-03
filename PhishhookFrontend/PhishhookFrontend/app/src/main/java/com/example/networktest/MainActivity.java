@@ -3,7 +3,9 @@ package com.example.networktest;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,38 +45,24 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         LoginFragment loginFragment = new LoginFragment();
         if (savedInstanceState == null) {
-            // Start with the Login Fragment
-            fragmentManager.beginTransaction()
-                    .add(R.id.fragment_container, loginFragment)
-                    .commit();
-        }
-
-
-        String LinkApiURL = "http://ec2-18-224-251-242.us-east-2.compute.amazonaws.com:8080/links";
-        StringRequest jsonLinkRequest = new StringRequest (Request.Method.GET, LinkApiURL , linkDataListener, errorListener){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                // TODO: store key in env file
-                params.put("X-API-KEY", "phishhookRyJHCenIz97Q5LIDPmHhDyg9eddxaBO29omDuzM1D5BsDRKH5mo3j8pmBehoO2Roj0Z4zWuDHlNW4AJVrSnLZF6lUravmyje13YB1LBriXHxYlxLUDYeXmV");
-                return params;
+            if (needsReAuthorization()) {
+                // Start with the Login Fragment
+                fragmentManager.beginTransaction()
+                        .add(R.id.fragment_container, loginFragment)
+                        .commit();
+            } else {
+                Intent intent = new Intent(MainActivity.this, LinkHistoryActivity.class);
+                startActivity(intent);
             }
-        };
-
-        queue.add(jsonLinkRequest);
-        System.out.println(getIntent().getData() + "+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+*+**+*+*++**+");
+        }
 
         Uri my_uri= getIntent().getData();
 
         if (my_uri != null) {
             String url = my_uri.toString();
-
             String extractedUrl = extractUrl(url);
-
             Uri uri = Uri.parse(extractedUrl);
-
             Log.d("Received link: ", uri.toString());
-
             // Launch NotificationSystemActivity
             Intent notificationIntent = new Intent(MainActivity.this, NotificationSystemActivity.class);
             notificationIntent.setData(uri);
@@ -95,8 +83,6 @@ public class MainActivity extends AppCompatActivity {
             return inputUrl;
         }
     }
-
-
 
     @Override
     protected void onStart() {
@@ -148,4 +134,14 @@ public class MainActivity extends AppCompatActivity {
             System.out.println(error + "#########");
         }
     };
+
+    private boolean needsReAuthorization() {
+        SharedPreferences sharedPref = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE);
+        long lastLoginDate = sharedPref.getLong("lastLoginDate", 0);
+        long currentTime = System.currentTimeMillis();
+        long sevenDaysInMillis = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
+
+        return (currentTime - lastLoginDate) > sevenDaysInMillis;
+    }
+
 }

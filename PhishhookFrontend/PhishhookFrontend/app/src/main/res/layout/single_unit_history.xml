@@ -1,54 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp">
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_bg"
+    android:layout_margin="8dp"
+    android:paddingBottom="20dp">
 
+    <!-- URL TextView -->
     <TextView
         android:id="@+id/url"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="15dp"
-        android:text="Name"
-        android:textColor="@color/black"
-        android:maxLines="1" />
-
-    <TextView
-        android:id="@+id/clicked_at"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/url"
-        android:textSize="25sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="5dp"
+        android:fontFamily="@font/font_family"
         android:text="Value"
-        android:textColor="@color/black"
-        android:maxLines="1" />
+        android:textColor="@color/softBlack"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:maxEms="50" />
 
-    <TextView
-        android:id="@+id/is_phishing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/clicked_at"
-        android:textSize="25sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="5dp"
-        android:text="Value"
-        android:textColor="@color/black"
-        android:maxLines="1" />
+    <!-- Clicked_At TextView -->
+        <TextView
+            android:id="@+id/clicked_at"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:fontFamily="@font/font_family"
+            android:text="Value"
+            android:textColor="@color/softBlack"
+            android:layout_below="@id/url"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:maxLines="1" />
 
-    <TextView
-        android:id="@+id/border2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_alignParentBottom="true"
-        android:background="#808080" />
+    <!-- Status TextView -->
+        <TextView
+            android:id="@+id/is_phishing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:fontFamily="@font/font_family"
+            android:text="Value"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/softBlack"
+            android:layout_below="@id/clicked_at"
+            android:maxLines="1" />
 
 </RelativeLayout>

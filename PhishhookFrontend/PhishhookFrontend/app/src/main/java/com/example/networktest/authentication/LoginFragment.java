@@ -1,5 +1,8 @@
 package com.example.networktest.authentication;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
@@ -17,6 +20,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.networktest.LinkHistoryActivity;
 import com.example.networktest.R;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -93,7 +97,9 @@ public class LoginFragment extends Fragment {
                                 public void run() {
                                     if (exists) {
                                         Log.d("User Check", "User exists with username: " + username);
-                                        //openHomeScreen(); // Open Home Screen on successful login
+                                        storeLoginDate();
+                                        Log.d("User", "User login date stored.");
+                                        openHomeScreen(); // Open Home Screen on successful login
                                         Toast.makeText(getActivity(), "Welcome back, " + username, Toast.LENGTH_SHORT).show();
                                     } else {
                                         Log.d("User Check", "User does not exist.");
@@ -147,16 +153,10 @@ public class LoginFragment extends Fragment {
                 .commit();
     }
 
-//    private void openHomeScreen() {
-//        HomeFragment homeFragment = new HomeFragment();
-//
-//        // Assuming you are using the newer FragmentContainerView and the AndroidX Fragment library
-//        // Replace 'R.id.fragment_container' with the ID of your FragmentContainerView in the layout
-//        getActivity().getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.fragment_container, homeFragment, "HomeFragment")
-//                .addToBackStack(null) // Add this transaction to the back stack (optional)
-//                .commit();
-//    }
+    private void openHomeScreen() {
+        Intent intent = new Intent(getActivity(), LinkHistoryActivity.class);
+        startActivity(intent);
+    }
 
     public interface UserCheckCallback {
         void onUserChecked(boolean exists, String username);
@@ -218,4 +218,12 @@ public class LoginFragment extends Fragment {
             }
         });
     }
+
+    private void storeLoginDate() {
+        SharedPreferences sharedPref = getActivity().getSharedPreferences("AppPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putLong("lastLoginDate", System.currentTimeMillis());
+        editor.apply();
+    }
+
 }

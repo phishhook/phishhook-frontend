@@ -7,12 +7,26 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <!-- Header TextView for 'Link History' -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Link History"
+        android:textSize="32sp"
+        android:textStyle="normal"
+        android:textFontWeight="800"
+        android:fontFamily="@font/font_family"
+        android:textColor="@color/whiteAccent"
+        android:gravity="start"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/primary" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="684dp"
-        android:background="@color/white"
+        android:layout_height="match_parent"
+        android:background="@color/primary"
         android:nestedScrollingEnabled="true"
         android:overScrollMode="never" />
-
 </LinearLayout>

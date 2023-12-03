@@ -1,5 +1,6 @@
 package com.example.networktest.authentication;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.core.content.ContextCompat;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import org.json.JSONObject;
 
+import com.example.networktest.LinkHistoryActivity;
 import com.example.networktest.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.hbb20.CountryCodePicker;
@@ -102,7 +104,7 @@ public class RegisterFragment extends Fragment {
                                 public void run() {
                                     if (success) {
                                         Log.d("User Check", "User creation success " + username);
-                                        //openHomeScreen(); // Open Home Screen on successful login
+                                        openHomeScreen(); // Open Home Screen on successful login
                                         Toast.makeText(getActivity(), "Welcome, " + username, Toast.LENGTH_SHORT).show();
                                     } else {
                                         Log.d("Create User", "Create User: "+ username + " - " + phoneNumber + ": Failed.");
@@ -162,16 +164,10 @@ public class RegisterFragment extends Fragment {
                 .commit();
     }
 
-//    private void openHomeScreen() {
-//        HomeFragment homeFragment = new HomeFragment();
-//
-//        // Assuming you are using the newer FragmentContainerView and the AndroidX Fragment library
-//        // Replace 'R.id.fragment_container' with the ID of your FragmentContainerView in the layout
-//        getActivity().getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.fragment_container, homeFragment, "HomeFragment")
-//                .addToBackStack(null) // Add this transaction to the back stack (optional)
-//                .commit();
-//    }
+    private void openHomeScreen() {
+        Intent intent = new Intent(getActivity(), LinkHistoryActivity.class);
+        startActivity(intent);
+    }
 
     public interface CreateUserCallback {
         void onUserCreated(boolean success);
