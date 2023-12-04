@@ -20,7 +20,10 @@ import android.widget.Toast;
 import org.json.JSONObject;
 
 import com.example.networktest.LinkHistoryActivity;
+import com.example.networktest.MainActivity;
 import com.example.networktest.R;
+import com.example.networktest.fragments.LinkHistoryFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.hbb20.CountryCodePicker;
 
@@ -165,8 +168,12 @@ public class RegisterFragment extends Fragment {
     }
 
     private void openHomeScreen() {
-        Intent intent = new Intent(getActivity(), LinkHistoryActivity.class);
-        startActivity(intent);
+        LinkHistoryFragment linkHistoryFragment = new LinkHistoryFragment();
+
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, linkHistoryFragment, "LinkHistoryFragment")
+                .addToBackStack(null)
+                .commit();
     }
 
     public interface CreateUserCallback {
@@ -243,5 +250,17 @@ public class RegisterFragment extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity)getActivity()).setBottomNavigationVisibility(false);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ((MainActivity)getActivity()).setBottomNavigationVisibility(true);
     }
 }

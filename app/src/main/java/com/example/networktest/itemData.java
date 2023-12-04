@@ -5,7 +5,7 @@ public class itemData {
     String clicktime;
     String verdict;
 
-    itemData(String url, String clicktime, String verdict) {
+    public itemData(String url, String clicktime, String verdict) {
         this.url = url;
         this.clicktime = clicktime;
         this.verdict = verdict;

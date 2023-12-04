@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.UserProfileFragment">
+    tools:context=".fragments.UserProfileFragment"
+    android:orientation="vertical"
+    >
 
     <!-- Header TextView for 'User Profile' -->
     <TextView
@@ -21,4 +24,29 @@
         android:layout_marginBottom="10dp"
         android:background="@color/primary" />
 
-</FrameLayout>
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Log Out Button-->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/logOutBtn"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Log Out"
+        android:fontFamily="@font/font_family"
+        android:textStyle="normal"
+        android:textFontWeight="700"
+        android:textSize="48px"
+        android:backgroundTint="@color/accent"
+        app:cornerRadius="4dp"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        />
+
+</LinearLayout>

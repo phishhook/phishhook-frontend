@@ -23,31 +23,64 @@
         android:maxEms="50" />
 
     <!-- Clicked_At TextView -->
-        <TextView
-            android:id="@+id/clicked_at"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:fontFamily="@font/font_family"
-            android:text="Value"
-            android:textColor="@color/softBlack"
-            android:layout_below="@id/url"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:maxLines="1" />
+<!--        <TextView-->
+<!--            android:id="@+id/clicked_at"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="25sp"-->
+<!--            android:fontFamily="@font/font_family"-->
+<!--            android:text="Value"-->
+<!--            android:textColor="@color/softBlack"-->
+<!--            android:layout_below="@id/url"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:maxLines="1" />-->
+
+    <Button
+        android:id="@+id/clicked_at"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:background="@drawable/button_style"
+        android:text="Value"
+        android:textColor="@color/whiteAccent"
+        android:fontFamily="@font/font_family"
+        android:textAllCaps="false"
+        android:layout_below="@id/url"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="16dp" />
 
     <!-- Status TextView -->
-        <TextView
-            android:id="@+id/is_phishing"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:fontFamily="@font/font_family"
-            android:text="Value"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:textColor="@color/softBlack"
-            android:layout_below="@id/clicked_at"
-            android:maxLines="1" />
+<!--        <TextView-->
+<!--            android:id="@+id/is_phishing"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:textSize="25sp"-->
+<!--            android:fontFamily="@font/font_family"-->
+<!--            android:text="Value"-->
+<!--            android:layout_marginStart="20dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:textColor="@color/softBlack"-->
+<!--            android:layout_below="@id/clicked_at"-->
+<!--            android:maxLines="1" />-->
+
+    <!-- Status TextView Styled as Button -->
+    <Button
+        android:id="@+id/is_phishing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:background="@drawable/button_style"
+        android:text="Value"
+        android:textColor="@color/whiteAccent"
+        android:fontFamily="@font/font_family"
+        android:textAllCaps="false"
+        android:layout_below="@id/clicked_at"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:paddingVertical="10dp"
+        android:paddingHorizontal="16dp" />
 
 </RelativeLayout>

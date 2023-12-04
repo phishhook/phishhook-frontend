@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -159,6 +160,14 @@ public class MainActivity extends AppCompatActivity {
         long sevenDaysInMillis = 7 * 24 * 60 * 60 * 1000; // 7 days in milliseconds
 
         return (currentTime - lastLoginDate) > sevenDaysInMillis;
+    }
+
+    // In your main activity
+    public void setBottomNavigationVisibility(boolean visible) {
+        BottomNavigationView navView = findViewById(R.id.navigation);
+        if (navView != null) {
+            navView.setVisibility(visible ? View.VISIBLE : View.GONE);
+        }
     }
 
 }
